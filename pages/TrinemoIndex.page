@@ -1,4 +1,5 @@
-<apex:page showHeader="false" sidebar="false" standardstylesheets="false">
+<
+pex:page showHeader="false" sidebar="false" standardstylesheets="false">
     <html>
         <head>
             <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.8.2.min.js" type="text/javascript"></script>
@@ -41,7 +42,7 @@
 				// Iterate over list of photos and append to phototiles div:
 				for(var i = 0; i < data.photos.length; i++) {
 					var photo = data.photos[i];
-					$(".phototiles").append("<img class='photo' src='" + photo.url + "' title='" + photo.name + "'/>");
+					$(".phototiles").append("<img class='img-rounded photo' src='" + photo.url + "' title='" + photo.name + "'/>");
 				}
 				Holder.run();
 				$(".phototiles").unblock();
@@ -49,10 +50,10 @@
 		}
 
                 $(document).ready(function() {
-                    $("#dayslider").slider({
-		    	step: 5,
-			disabled:true 
-		    });
+                    /* $("#dayslider").slider({ */
+		    	/* step: 5, */
+			/* disabled:true */ 
+		    /* }); */
 		    //select element with 5 - 20 options
 		    /* var el = $('#daylabels'); */
 		    /* var options = $('#daylabels option'); */
@@ -93,7 +94,7 @@
 
 		.hero-unit.heading h4 {
 			font-size: 20px;
-			color: #CCC;
+			color: white;
 			font-family: helvetica;
 			font-weight: normal;
 		}
@@ -121,6 +122,10 @@
 			background-color: #333;
 		}
 
+		a {
+			color: white;
+		}
+
 
 	    </style>
             <title>TrineMo</title>
@@ -130,11 +135,11 @@
                 <header class="hero-unit heading">
                     <h1>TrineMo</h1>
 		    <br/>
-                    <h4>Move slider to check out our progress</h4>
+                    <h4>Watch this space to check out our mo-gress</h4>
                 </header>
             </div>
             <div class="container slider">
-                <div id="dayslider"></div>
+                <!--<div id="dayslider"></div>-->
             </div>
 	    <br/>
 	    <br/>
@@ -144,6 +149,19 @@
 	    <br/>
 	    <br/>
 	    <div class="container footer">
+		    <p>
+		    	TrineMo. Grown by the Trineos in a few hours. We’ll be grooming TrineMo over the coming month with more features and photos of the team.
+		    </p>
+		    <p>
+			While we’re not grooming the mo’s, we deliver development expertise in Salesforce.com, Force.com, Ruby, Rails and Javascript.
+		    </p>
+		    <br/>
+		    <br/>
+		    <h4>
+			<a href="http://trineo.co.nz">trineo.co.nz</a> // <a href="http://trineo.com.au">trineo.com.au</a>
+		    </h4>
+	    	    <br/>
+	    	    <br/>
 		    <h4>&copy; Trineo Ltd 2012</h4>
 	    </div>
 
