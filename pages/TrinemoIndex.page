@@ -1,0 +1,152 @@
+<apex:page showHeader="false" sidebar="false" standardstylesheets="false">
+    <html>
+        <head>
+            <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.8.2.min.js" type="text/javascript"></script>
+            <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.7.2/jquery-ui.min.js" type="text/javascript"></script>
+            <script src="https://netdna.bootstrapcdn.com/twitter-bootstrap/2.1.1/js/bootstrap.min.js"></script>
+	    <script src="http://malsup.github.com/jquery.blockUI.js"></script>
+            <script src="{!$RESOURCE.HolderJS}"></script>
+            <script src="{!$RESOURCE.BlockUI}"></script>
+            <link href="https://netdna.bootstrapcdn.com/twitter-bootstrap/2.1.1/css/bootstrap-combined.min.css" rel="stylesheet"/>
+            <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.9/themes/base/jquery-ui.css" type="text/css" media="all" /> 
+            <link rel="stylesheet" href="{!$RESOURCE.TrinemoStyle}" type="text/css" media="all" /> 
+
+
+            <script type="text/javascript">
+
+		function getPhotos(day) {
+			$(".phototiles").block({ 
+				message: '<h1>Loading...</h1>', 
+				css: { 
+					border: "none",
+					color: "white",
+					background: "none"
+				},
+				overlaycss: {
+					background: "#333"
+				},
+				centerX:  true,
+				centerY:  true
+			}); 
+			script = document.createElement('script');
+			script.setAttribute('src', 'https://trineo.secure.force.com/trinemo/services/apexrest/photos?callback=handleGetPhotos&day=' + day);
+			document.head.appendChild(script);
+		}
+
+		// Given a JSON response, load the photos:
+		function handleGetPhotos(data) {
+			if(data.status == "200") {
+				$(".phototiles").empty();
+
+				// Iterate over list of photos and append to phototiles div:
+				for(var i = 0; i < data.photos.length; i++) {
+					var photo = data.photos[i];
+					$(".phototiles").append("<img class='photo' src='" + photo.url + "' title='" + photo.name + "'/>");
+				}
+				Holder.run();
+				$(".phototiles").unblock();
+			}
+		}
+
+                $(document).ready(function() {
+                    $("#dayslider").slider({
+		    	step: 5,
+			disabled:true 
+		    });
+		    //select element with 5 - 20 options
+		    /* var el = $('#daylabels'); */
+		    /* var options = $('#daylabels option'); */
+
+		    /* //add slider */
+		    /* var slider = $('#daysslider').insertAfter( el ).slider({ */
+			    /* min: 1, */
+			    /* max: options.length, */
+			    /* range: 'min', */
+			    /* value: el.selectedIndex + 1, */
+			    /* slide: function( event, ui ) { */
+				    /* el.selectedIndex = ui.value - 1; */
+				    /* slider.find("a").text(el.options[el.selectedIndex].label); */
+			    /* }, */
+			    /* stop: function() { */
+				    /* $(el).change(); */
+			    /* } */
+		    /* }); */
+
+		    /* slider.find("a").text(el.options[el.selectedIndex].label); //pre-populate value into slider handle. */
+
+		    getPhotos(1); // load photos for first day
+                });
+            </script>
+
+	    <style type="text/css">
+	    	.hero-unit.heading {
+			text-align: center !important;
+			background-image: url({!$Resource.TrineoHeaderBG});
+			background-color: #444;
+			padding-top: 30px;
+		}
+
+		.hero-unit.heading h1 {
+			font-size: 70px;
+			color: white;
+		}
+
+		.hero-unit.heading h4 {
+			font-size: 20px;
+			color: #CCC;
+			font-family: helvetica;
+			font-weight: normal;
+		}
+
+		.photosection {
+			text-align: center !important;
+			}
+
+		.footer {
+			text-align: center !important;
+			color: white;
+		}
+
+		.photo {
+			width: 380px;
+			height: 250px;
+			margin: 4px;
+		}
+		img:hover {  
+			opacity: 1;
+			 -webkit-filter: brightness(7%);
+	    	}
+
+		body {
+			background-color: #333;
+		}
+
+
+	    </style>
+            <title>TrineMo</title>
+        </head>
+        <body>
+            <div class="container">
+                <header class="hero-unit heading">
+                    <h1>TrineMo</h1>
+		    <br/>
+                    <h4>Move slider to check out our progress</h4>
+                </header>
+            </div>
+            <div class="container slider">
+                <div id="dayslider"></div>
+            </div>
+	    <br/>
+	    <br/>
+            <div class="container phototiles"></div>
+
+	    <br/>
+	    <br/>
+	    <br/>
+	    <div class="container footer">
+		    <h4>&copy; Trineo Ltd 2012</h4>
+	    </div>
+
+        </body>
+    </html>
+</apex:page>
