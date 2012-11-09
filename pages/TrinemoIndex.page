@@ -41,7 +41,7 @@
 				// Iterate over list of photos and append to phototiles div:
 				for(var i = 0; i < data.photos.length; i++) {
 					var photo = data.photos[i];
-					$(".phototiles").append("<img class='img-rounded photo' src='" + photo.url + "' title='" + photo.name + "'/>");
+					$(".phototiles").append("<a href='" + photo.link + "'><img class='img-rounded photo' src='" + photo.url + "' title='" + photo.name + "'/></a>");
 				}
 				Holder.run();
 				$(".phototiles").unblock();
@@ -49,6 +49,7 @@
 		}
 
 		var day = 1;
+		var todaysDay = 20;
                 $(document).ready(function() {
                     $("#dayslider").slider({
 			min: 1,
@@ -65,6 +66,10 @@
 			slide: function(event, ui) {
 				$(".ui.slider-handle").tooltip("destroy");
 				day = ui.value;
+				if(day > todaysDay) {
+					$("daysslider").slider("value", todaysDay);
+					day = todaysDay;
+				}
 			        $(".ui-slider-handle").attr("title", "Day " + day);
 			        $(".ui-slider-handle").attr("data-original-title", "Day " + day);
 				$(".ui-slider-handle").tooltip("show");
