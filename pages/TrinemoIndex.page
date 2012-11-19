@@ -48,8 +48,8 @@
 			}
 		}
 
-		var day = 1;
-		var todaysDay = 20;
+		var todaysDay = {!DAY(TODAY())};
+		var day = todaysDay;
                 $(document).ready(function() {
                     $("#dayslider").slider({
 			min: 1,
@@ -77,7 +77,8 @@
 
 		    });
 
-		    getPhotos(1); // load photos for first day
+		    getPhotos(todaysDay); // load photos for first day
+		    $("#dayslider").slider("value", todaysDay);
                 });
             </script>
 
@@ -149,7 +150,7 @@
                 <header class="hero-unit heading">
                     <h1>TrineMo</h1>
 		    <br/>
-                    <h4>Watch this space to check out our mo-gress</h4>
+                    <h4>Move the slider to check out our mo-gress</h4>
                 </header>
             </div>
             <div class="container slider">
